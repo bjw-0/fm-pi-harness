@@ -23,6 +23,8 @@ Launch from a repository to work on it: `cd /path/to/repo` followed by `bash /pa
 
 Pi reserves 4096 context tokens by default, leaving a 4096-token model only one output token. `patch_pi.py` applies a provider-specific 512-token safety margin to the pinned Pi installation, failing if the code no longer matches. Pi's context estimate is not Apple's exact tokenizer; the margin and compaction settings do not guarantee that long prompts fit. Start small, limit tool output, and restart or compact if context overflows. Updating Pi requires revalidating the patch.
 
+The launcher uses a short coding prompt to leave more room for the task and tools. Pass `--standard-prompt` to restore Pi's default prompt, or `--system-prompt 'your instructions'` to supply your own. `python3 benchmark.py` compares the two prompts on disposable read and edit/test fixtures; it makes model calls and reports per-run timing and checks. These small tests are not a measure of real-world agent reliability.
+
 The launcher uses the local `pi-config` directory, so it does not overwrite a user's existing Pi configuration. Add your own MCP configuration there following [Pi's MCP documentation](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/mcp.md). MCP calls, long conversations, and model correctness are not guaranteed by the fixture test. Never commit credentials or session logs.
 
 ## Bounded single-file experiment

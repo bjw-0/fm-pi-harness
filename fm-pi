@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 root="$(cd "$(dirname "$0")" && pwd)"
 python3 "$root/patch_pi.py" >&2
 port=19761
@@ -19,4 +19,13 @@ if ! curl -fsS "http://127.0.0.1:$port/health" >/dev/null 2>&1; then
   exit 1
 fi
 export PI_CODING_AGENT_DIR="$root/pi-config"
-"$root/pi/node_modules/.bin/pi" --offline --no-skills --model apple-fm/system "$@"
+prompt_args=(--system-prompt 'You are a coding assistant. Inspect relevant files, make focused changes, run appropriate checks, and report results and uncertainty concisely.')
+args=()
+for arg in "$@"; do
+  case "$arg" in
+    --standard-prompt) prompt_args=() ;;
+    --system-prompt|--system-prompt=*) prompt_args=(); args+=("$arg") ;;
+    *) args+=("$arg") ;;
+  esac
+done
+"$root/pi/node_modules/.bin/pi" --offline --no-skills --model apple-fm/system "${prompt_args[@]}" "${args[@]}"
