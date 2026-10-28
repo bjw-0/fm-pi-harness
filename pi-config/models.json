@@ -1,0 +1,11 @@
+{
+  "providers": {
+    "apple-fm": {
+      "baseUrl": "http://127.0.0.1:19761/v1",
+      "api": "openai-completions",
+      "apiKey": "local",
+      "compat": {"supportsStrictMode": false, "supportsStore": false, "supportsUsageInStreaming": false},
+      "models": [{"id": "system", "name": "Apple on-device", "contextWindow": 4096, "maxTokens": 512}]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "compaction": {
+    "reserveTokens": 768,
+    "keepRecentTokens": 1024
+  },
+  "lastChangelogVersion": "1.4.0"
+}

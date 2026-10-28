@@ -1,0 +1,10 @@
+pi/node_modules/
+pi-config/auth.json
+pi-config/mcp-auth.json
+pi-config/mcp.json
+pi-config/models-store.json
+pi-config/sessions/
+pi-config/*.log
+runs/
+__pycache__/
+fm-server.log
